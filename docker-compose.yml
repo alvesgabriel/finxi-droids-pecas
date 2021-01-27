@@ -1,0 +1,16 @@
+version: "3.3"
+
+services:
+    database:
+        container_name: backend_database
+        image: postgres
+        volumes:
+            - ./.pgdata:/var/lib/postgresql/data
+        environment:
+            - LC_ALL=C.UTF-8
+            - POSTGRES_DB=backend
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        ports:
+            - 5433:5432
+

@@ -1,0 +1,9 @@
+DEBUG=True
+ALLOWED_HOSTS=localhost, 127.0.0.1
+SECRET_KEY=secret key with 50 characters
+DATABASE_URL=postgres://postgres:postgres@localhost/postgres
+# Cloudinary Configuration
+CLOUD_NAME=
+API_KEY=
+API_SECRET=
+
