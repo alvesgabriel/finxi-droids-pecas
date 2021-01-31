@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from functools import partial
 from pathlib import Path
+
 import dj_database_url
 from decouple import Csv, config
 
@@ -30,7 +31,7 @@ DEBUG = config("DEBUG", default=False, cast=bool)
 
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default=[], cast=Csv())
 
-AUTH_USER_MODEL = 'base.User'
+AUTH_USER_MODEL = "base.User"
 
 # Application definition
 
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_extensions",
     "backend.base",
+    "backend.adverts",
 ]
 
 MIDDLEWARE = [
@@ -141,11 +143,7 @@ CLOUDINARY_STORAGE = {
 # STORAGE CONFIGURATION IN CLOUDINARY
 # ===================================
 
-if (
-    CLOUDINARY_STORAGE["CLOUD_NAME"]
-    and CLOUDINARY_STORAGE["API_KEY"]
-    and CLOUDINARY_STORAGE["API_SECRET"]
-):
+if CLOUDINARY_STORAGE["CLOUD_NAME"] and CLOUDINARY_STORAGE["API_KEY"] and CLOUDINARY_STORAGE["API_SECRET"]:
     STATIC_URL = "/finxi-droids-pecas/static/"
     MEDIA_URL = "/finxi-droids-pecas/media/"
 
@@ -164,6 +162,4 @@ REST_FRAMEWORK = {
 }
 
 if DEBUG:
-    REST_FRAMEWORK.get("DEFAULT_AUTHENTICATION_CLASSES").append(
-        "rest_framework.authentication.SessionAuthentication"
-    )
+    REST_FRAMEWORK.get("DEFAULT_AUTHENTICATION_CLASSES").append("rest_framework.authentication.SessionAuthentication")

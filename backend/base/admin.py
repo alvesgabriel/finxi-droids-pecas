@@ -1,3 +1,4 @@
+from backend.base.models import User
 from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.admin.options import IS_POPUP_VAR
@@ -16,8 +17,6 @@ from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
-from backend.base.models import User
-
 csrf_protect_m = method_decorator(csrf_protect)
 sensitive_post_parameters_m = method_decorator(sensitive_post_parameters())
 
@@ -31,7 +30,7 @@ class UserAdmin(admin.ModelAdmin):
         (
             _("Permissions"),
             {
-                "fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions"),
+                "fields": ("is_active", "is_advertiser", "is_staff", "is_superuser", "groups", "user_permissions"),
             },
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
@@ -41,7 +40,7 @@ class UserAdmin(admin.ModelAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("first_name", "email", "password1", "password2"),
+                "fields": ("first_name", "email", "password1", "password2", "is_advertiser"),
             },
         ),
     )

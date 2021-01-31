@@ -17,7 +17,11 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 
+from backend.adverts.views import AddressViewSet, AdvertViewSet
+
 router = routers.DefaultRouter()
+router.register("addresses", AddressViewSet, basename="addresses")
+router.register("adverts", AdvertViewSet, basename="adverts")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
