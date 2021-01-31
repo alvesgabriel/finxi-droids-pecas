@@ -34,6 +34,8 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff=True.")
 
+        extra_fields.update({"is_advertiser": False})
+
         return self._create_user(email, password, **extra_fields)
 
 
@@ -58,6 +60,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             "Designates whether this user should be treated as active. " "Unselect this instead of deleting accounts."
         ),
     )
+    is_advertiser = models.BooleanField(default=False)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     objects = UserManager()
