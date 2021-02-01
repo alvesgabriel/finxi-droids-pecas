@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
 
-from backend.adverts.views import AddressViewSet, AdvertViewSet
+from backend.adverts.views import AddressViewSet, AdvertFinalizeDetail, AdvertViewSet
 
 router = routers.DefaultRouter()
 router.register("addresses", AddressViewSet, basename="addresses")
@@ -26,5 +26,6 @@ router.register("adverts", AdvertViewSet, basename="adverts")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
+    path("adverts/<int:pk>/finalize/", AdvertFinalizeDetail.as_view(), name="adverts-finalize"),
     path("", include("rest_framework.urls", namespace="rest_framework")),
 ]
