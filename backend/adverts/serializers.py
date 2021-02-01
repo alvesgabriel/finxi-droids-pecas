@@ -41,3 +41,14 @@ class AdvertInfoSerializer(serializers.ModelSerializer):
             "description",
             "opened",
         )
+
+
+class AdvertFinalizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Advert
+        fields = ("id",)
+
+    def update(self, instance, validated_data):
+        instance.opened = False
+        instance.save()
+        return instance

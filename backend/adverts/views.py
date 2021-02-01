@@ -1,6 +1,6 @@
 from backend.adverts import models, serializers
 from backend.adverts.permissions import IsOwner
-from rest_framework import permissions, viewsets
+from rest_framework import generics, permissions, viewsets
 
 
 class AddressViewSet(viewsets.ModelViewSet):
@@ -29,3 +29,9 @@ class AdvertViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+
+class AdvertFinalizeDetail(generics.UpdateAPIView):
+    serializer_class = serializers.AdvertFinalizeSerializer
+    queryset = models.Advert.objects.all()
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
