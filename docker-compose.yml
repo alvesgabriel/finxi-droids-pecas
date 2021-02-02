@@ -14,3 +14,12 @@ services:
         ports:
             - 5433:5432
 
+    web:
+        build: .
+        links:
+            - "database:dockerdb"
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8000:8000
+        depends_on:
+            - database
