@@ -18,6 +18,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from backend.adverts.views import AddressViewSet, AdvertFinalizeDetail, AdvertViewSet
+from backend.base.views import CustomAuthToken
 
 router = routers.DefaultRouter()
 router.register("addresses", AddressViewSet, basename="addresses")
@@ -26,6 +27,7 @@ router.register("adverts", AdvertViewSet, basename="adverts")
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),
+    path("login/token/", CustomAuthToken.as_view(), name="login-token"),
     path("adverts/<int:pk>/finalize/", AdvertFinalizeDetail.as_view(), name="adverts-finalize"),
     path("", include("rest_framework.urls", namespace="rest_framework")),
 ]
