@@ -7,9 +7,9 @@ from backend.adverts.models import Address
 @pytest.fixture
 def user_advertiser(db, django_user_model):
     password = "May the Force be with you!"
-    user = baker.make(
-        django_user_model, first_name="Watto", email="watto@tatooine.com", password=password, is_advertiser=True
-    )
+    user = baker.make(django_user_model, first_name="Watto", email="watto@tatooine.com", is_advertiser=True)
+    user.set_password(password)
+    user.save()
     user.flat_password = password
     return user
 
